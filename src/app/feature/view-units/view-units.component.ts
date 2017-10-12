@@ -10,10 +10,16 @@ import { Unit } from "app/models/unit";
 export class ViewUnitsComponent implements OnInit {
 
   constructor(private unitsService:UnitsService) { }
-  units: Unit[];
+  units: Unit[] = [];
+  selectedUnit: Unit = null;
 
   ngOnInit() {
     this.unitsService.units.subscribe(units=>this.units = units);
   }
 
+
+  onChanged(selectedItem){
+    //You will notice that both selectedItem and this.selectedUnit are the new value
+    console.log(selectedItem.name, this.selectedUnit.name);
+  }
 }

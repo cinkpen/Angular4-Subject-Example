@@ -21,7 +21,7 @@ export class MockHttpService {
           new Unit(4, "kW"),
           new Unit(5, "kWh")];
         resolve(units);
-        }, 1000);
+        }, 3000);
     });
 
     return prom;

@@ -1,5 +1,41 @@
-<ul>
-  <li *ngFor="let unit of units">
-    {{ unit.name }}
-  </li>
-</ul>
+
+
+<ng-template #loading>I am just loading up the units now. This simulates a SLOW http response.
+  <div class="loader"></div>
+</ng-template>
+
+
+<ng-template #content>
+  <ul>
+    <li *ngFor="let unit of units"
+        [ngClass]="{'mark': unit== selectedUnit }">
+      {{ unit.name }}
+    </li>
+  </ul>
+
+  <h1>Example of Drop Down List</h1>
+  <select class="dropdown" [(ngModel)]="selectedUnit" (ngModelChange)="onChanged($event)" required>
+          <option value="" disabled selected>Select your option</option>
+          <option *ngFor="let unit of units" [ngValue]="unit">{{unit.name}}</option>
+      </select>
+
+  <h1>Example of Radio Buttons</h1>
+  <table>
+    <tr *ngFor="let unit of units">
+      <td>{{ unit.name }}</td>
+      <td>
+        <input type="radio" name="radiogroup"  [value]="unit" [(ngModel)]="selectedUnit">
+      </td>
+    </tr>
+  </table>
+
+</ng-template>
+
+
+
+
+
+<div class="container">
+    
+  <div *ngIf="units.length == 0;then loading else content"></div>
+</div>
